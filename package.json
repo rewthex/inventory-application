@@ -1,0 +1,26 @@
+{
+  "name": "inventory-application",
+  "version": "1.0.0",
+  "description": "Bee supply store inventory application",
+  "homepage": "https://github.com/rewthex/inventory-application#readme",
+  "bugs": {
+    "url": "https://github.com/rewthex/inventory-application/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rewthex/inventory-application.git"
+  },
+  "license": "MIT",
+  "author": "",
+  "type": "module",
+  "main": "app.js",
+  "scripts": {
+    "start": "node --watch app.js"
+  },
+  "dependencies": {
+    "dotenv": "^16.5.0",
+    "ejs": "^3.1.10",
+    "express": "^5.1.0",
+    "pg": "^8.14.1"
+  }
+}
