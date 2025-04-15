@@ -10,7 +10,11 @@
   <div class="container">
     <%- include('partials/header.ejs') %>
     <%- include('partials/sidebar.ejs') %>
+    <% if (itemDetailView) { %>
+      <%- include('partials/itemDetail.ejs') %>
+    <% } else { %>
     <%- include('partials/items.ejs') %>
+    <% } %>
   </div>
 </body>
 </html>

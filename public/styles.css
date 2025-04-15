@@ -1,11 +1,28 @@
-@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap");
 
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
 }
 
 * {
   margin: 0;
+}
+
+html {
+  --s: 20px;
+  --c1: #ffffff;
+  --c2: #e4d9b0;
+
+  --c: #0000, var(--c1) 0.5deg 119.5deg, #0000 120deg;
+  --g1: conic-gradient(from 60deg at 56.25% calc(425% / 6), var(--c));
+  --g2: conic-gradient(from 180deg at 43.75% calc(425% / 6), var(--c));
+  --g3: conic-gradient(from -60deg at 50% calc(175% / 12), var(--c));
+  background: var(--g1), var(--g1) var(--s) calc(1.73 * var(--s)), var(--g2),
+    var(--g2) var(--s) calc(1.73 * var(--s)), var(--g3) var(--s) 0,
+    var(--g3) 0 calc(1.73 * var(--s)) var(--c2);
+  background-size: calc(2 * var(--s)) calc(3.46 * var(--s));
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -20,51 +37,158 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-img, picture, video, canvas, svg {
+img,
+picture,
+video,
+canvas,
+svg {
   display: block;
   max-width: 100%;
 }
 
-input, button, textarea, select {
+input,
+button,
+textarea,
+select {
   font: inherit;
 }
 
-p, h1, h2, h3, h4, h5, h6 {
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   overflow-wrap: break-word;
 }
 
 p {
   text-wrap: pretty;
 }
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   text-wrap: balance;
 }
 
-#root, #__next {
+#root,
+#__next {
   isolation: isolate;
 }
 
 .container {
   display: grid;
+  max-width: 80%;
+  margin: 0 auto;
+  padding: 20px;
   grid-template-columns: 1fr 4fr;
   grid-template-rows: 1fr 7fr;
   grid-template-areas:
     "header header"
     "sidebar content";
   gap: 20px;
-  height: 100vh;
+  min-height: 100vh;
 }
+
 .header {
   grid-area: header;
+  display: grid;
+  grid-template-columns: 1fr 3fr 4fr;
+  grid-template-rows: 1fr 1fr;
+  grid-template-areas:
+    "logo title search"
+    "logo sub-title search";
+  max-height: 150px;
   background-color: #f8f9fa;
-  padding: 20px;
-  text-align: center;
+  text-align: left;
+  padding: 15px;
+  border: 1px solid #ced4da;
+  border-radius: 4px;
 }
+
+.logo {
+  grid-area: logo;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.title {
+  grid-area: title;
+  font-size: 2.5rem;
+}
+
+.sub-title {
+  grid-area: sub-title;
+  justify-self: end;
+  font-style: italic;
+  color: #6c757d;
+}
+
+.search {
+  grid-area: search;
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+}
+
+.search form {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  width: 100%;
+}
+
+.search input {
+  min-width: 60%;
+  padding: 10px;
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+}
+.search button {
+  padding: 12px 25px;
+  background-color: #000000;
+  color: white;
+  letter-spacing: 1.5px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.search button:hover {
+  background-color: #0056b3;
+}
+
 .sidebar {
   grid-area: sidebar;
-  background-color: #e9ecef;
-  padding: 20px;
+  background-color: #f8f9fa;
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+  padding-left: 20px;
 }
+
+.sidebar a {
+  text-decoration: none;
+  color: black;
+  cursor: pointer;
+}
+.sidebar a:hover {
+  text-decoration: underline;
+}
+.sidebar a.active {
+  font-weight: bold;
+}
+
+.items {
+  padding: 10px 10px;
+  background-color: #f8f9fa;
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+}
+
 .content {
   grid-area: content;
   background-color: #ffffff;
@@ -76,4 +200,39 @@ h1, h2, h3, h4, h5, h6 {
 }
 .sidebar ul li {
   margin: 10px 0;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+table th {
+  text-align: left;
+  border-bottom: 2px solid #ddd;
+}
+
+table th:nth-of-type(2) {
+  width: 45%;
+}
+
+table td:nth-of-type(2) {
+  letter-spacing: 1px;
+  word-spacing: 2px;
+}
+
+table tr:hover {
+  background-color: #f1f1f1;
+}
+
+table tr {
+  font-weight: 300;
+}
+
+td > a {
+  display: block;
+  width: 100%;
+  height: 100%;
+  text-decoration: none;
+  color: inherit;
 }

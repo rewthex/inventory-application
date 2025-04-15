@@ -1,8 +1,9 @@
 <nav class="sidebar">
   <ul>
+    <li><a href="/">All</a></li>
     <% for(const category of categories) { %>
     <li>
-      <a href="/categories/<%= category.name.toLowerCase() %>"> <%= category.name %> </a>
+      <a href="/categories/<%= category.id %>"> <%= category.name %> </a>
     </li>
     <% } %>
   </ul>
