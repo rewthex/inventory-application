@@ -1,7 +1,31 @@
-<main class="item">
-  <%= product.id %>
-  <%= product.description %>
-  <%= product.price %>
-  <%= product.stock_quantity %>
-  <%= product.category_name %>
+<main class="items item">
+  <ul>
+    <li><h2><%= product.name %></h2></li>
+    <li>ID: <%= product.id %></li>
+    <li>Category: <%= product.category_name %></li>
+    <li>Description: <%= product.description %></li>
+    <li>Price: $<%= product.price.toFixed(2) %></li>
+    <li>
+      <form
+        action="/products/<%= product.id %>"
+        method="POST"
+        class="update-form"
+      >
+        <div>
+          <label for="quantity">Quantity: </label>
+          <input
+            name="quantity"
+            id="quantity"
+            type="number"
+            value="<%= product.stock_quantity %>"
+          />
+        </div>
+        <div>
+          <label for="password">Password: </label>
+          <input name="password" id="password" type="password" required />
+        </div>
+        <button type="submit">Update</button>
+      </form>
+    </li>
+  </ul>
 </main>

@@ -1,24 +1,28 @@
-import { pool } from "./pool.js";
+import { pool } from "./db.js";
 
 const getAllProducts = async () => {
   try {
-    const { rows } = await pool.query(`
-      SELECT 
+    const { rows } = await pool.query(
+      `
+      SELECT
         products.id,
         products.name,
         products.price,
         products.stock_quantity,
         categories.name AS category_name
-      FROM 
+      FROM
         products
-      INNER JOIN 
-        categories ON products.category_id = categories.id;`);
+      INNER JOIN
+        categories ON products.category_id = categories.id
+      ORDER BY
+        products.id`
+    );
     return rows;
   } catch (error) {
     console.error("Error fetching products:", error);
     throw error;
   }
-};
+}
 
 const getAllCategories = async () => {
   try {
@@ -81,9 +85,30 @@ const getProductByProductId = async (productId) => {
   }
 };
 
+const updateProductQuantityById = async (productId, quantity) => {
+  try {
+    const { rows } = await pool.query(
+      `
+      UPDATE
+        products
+      SET
+        stock_quantity = $1
+      WHERE
+        id = $2
+      RETURNING *`,
+      [quantity, productId]
+    );
+    return rows[0];
+  } catch (error) {
+    console.error("Error updating product quantity:", error);
+    throw error;
+  }
+};
+
 export default {
   getAllProducts,
   getAllCategories,
   getProdcutsByCategoryId,
   getProductByProductId,
+  updateProductQuantityById,
 };
