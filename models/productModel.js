@@ -22,7 +22,7 @@ const getAllProducts = async () => {
     console.error("Error fetching products:", error);
     throw error;
   }
-}
+};
 
 const getAllCategories = async () => {
   try {
@@ -85,6 +85,33 @@ const getProductByProductId = async (productId) => {
   }
 };
 
+const getProductsByQuery = async (query) => {
+  const searchQuery = `%${query}%`;
+
+  try {
+    const { rows } = await pool.query(
+      `
+      SELECT
+        products.id,
+        products.name,
+        products.description,
+        products.price,
+        products.stock_quantity,
+        categories.name AS category_name
+      FROM
+        products
+      INNER JOIN
+        categories ON products.category_id = categories.id
+      WHERE
+        products.name ILIKE $1`,
+      [searchQuery]
+    );
+    return rows;
+  } catch (error) {
+    console.error("Error fetching products by query:", error);
+    throw error;
+  }
+};
 const updateProductQuantityById = async (productId, quantity) => {
   try {
     const { rows } = await pool.query(
@@ -110,5 +137,6 @@ export default {
   getAllCategories,
   getProdcutsByCategoryId,
   getProductByProductId,
+  getProductsByQuery,
   updateProductQuantityById,
 };

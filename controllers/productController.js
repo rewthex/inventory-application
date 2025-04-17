@@ -23,6 +23,14 @@ const showProductById = async (req, res) => {
   return res.render("index", { categories, product, itemDetailView: true });
 };
 
+const showProductsByQuery = async (req, res) => {
+  const query = req.query.query;
+  const categories = await productModel.getAllCategories();
+  const products = await productModel.getProductsByQuery(query);
+
+  return res.render("index", { categories, products, itemDetailView: false });
+};
+
 const updateProductQuantity = async (req, res) => {
   const { quantity, password } = req.body;
 
@@ -42,5 +50,6 @@ export default {
   showAllProducts,
   showProductsByCategoryId,
   showProductById,
+  showProductsByQuery,
   updateProductQuantity,
 };
